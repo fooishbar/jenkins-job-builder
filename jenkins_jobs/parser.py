@@ -236,6 +236,7 @@ class YamlParser(object):
             self.jobs.append(job)
         for project in self.data.get('project', {}).values():
             logger.debug("Expanding project '{0}'".format(project['name']))
+            project = self._applyDefaults(project)
             # use a set to check for duplicate job references in projects
             seen = set()
             for jobspec in project.get('jobs', []):
